@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {count} from "rxjs/operator/count";
 
 @Component({
   selector: 'app-servers',
@@ -11,7 +12,11 @@ export class ServersComponent implements OnInit {
 
   allowNewServer = false;
   serverCreationStatus = 'No';
-  serverName: string = '';
+  serverName = '';
+  serverCreated = false;
+  servers = ['Test1', 'Test2'];
+  events = [];
+  buttonToggle = false;
 
   constructor() {
     setTimeout(() => {
@@ -23,6 +28,8 @@ export class ServersComponent implements OnInit {
   }
 
   onCreateServer() {
+    this.serverCreated = true;
+    this.servers.push(this.serverName);
     this.serverCreationStatus = 'created, name: ' + this.serverName;
   }
 
@@ -31,5 +38,9 @@ export class ServersComponent implements OnInit {
   }
   onResetServerName() {
     this.serverName = '';
+  }
+  showParagraph(event) {
+    this.events.push(this.events.length + 1);
+    this.buttonToggle === false ? this.buttonToggle = true : this.buttonToggle = false;
   }
 }

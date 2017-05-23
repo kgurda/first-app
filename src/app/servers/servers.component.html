@@ -6,7 +6,14 @@
 <input type="text" class="form-control" [(ngModel)]="serverName">
 <button class="btn btn-pimary" [disabled]="!allowNewServer" (click)="onCreateServer()">Add</button>
 
-<p> {{ serverCreationStatus }}</p>
-<app-server></app-server>
-<app-server></app-server>
-<!--<p> {{ serverName }}</p>-->
+<!--<p> {{ serverCreationStatus }}</p>-->
+<p *ngIf="serverCreated">Server created, name: {{ serverName }}</p>
+<app-server *ngFor="let server of servers"></app-server>
+
+<hr>
+
+<button (click)="showParagraph($event)">Toggle</button>
+
+<p *ngIf="buttonToggle===false">Paragraf</p>
+
+<p *ngFor="let event of events" [ngClass]="{future: event > 4 }">{{ event }}</p>
